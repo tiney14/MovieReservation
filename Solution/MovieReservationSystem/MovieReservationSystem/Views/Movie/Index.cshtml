@@ -1,0 +1,46 @@
+﻿@model MovieReservationSystem.Models.MovieModel
+
+@section styles {
+
+    <link href="~/css/Image.css" rel="stylesheet" />
+}
+<script src="~/js/Movie/Movie.js"></script>
+<br />
+<div class="container row p-0 m-0">
+    <div class="col-9">
+        <h2 class="text-info"> Movie</h2>
+    </div>
+    <div class="col-3">
+        <a asp-action="Create" class="btn btn-info form-control text-white">Add Movie</a>
+    </div>
+</div>
+
+
+<div class="row">
+
+    @foreach (var item in Model.ListMovie)
+    {
+
+    <div class="column">
+        <div class="content">
+            <div class="box-tools pull-right">
+                <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Edit" class="fade fa-edit text-gray"></a>
+                <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Delete" class="fade fa-trash text-gray"></a>
+            </div>
+            <img src="" style="height:340px !important;width:240px !important;" data-id=@item.Id class="image" />
+            <h3>@item.Movie_Name</h3>
+            <p>@item.Description</p>
+        </div>
+        <div class="box-footer text-right">
+            <a asp-action="Edit" asp-route-id="@item.Id" title="Edit" class="btn btn-info text-white">Edit</a>
+        </div>
+    </div>
+    }
+
+
+
+</div>
+
+
+
+

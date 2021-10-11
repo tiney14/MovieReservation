@@ -1,0 +1,112 @@
+﻿@model MovieReservationSystem.Models.SeatModel
+
+@section Scripts{
+    <script type="text/javascript">
+        var urlString = '@Url.Action("TempSave", "Reserve")';
+        var timeSlotUrlString = '@Url.Action("TimeSlot", "Reserve")';
+        var seatSlotUrlString = '@Url.Action("SeatByMovie", "Reserve")';
+    </script>
+    <script src="~/js/Reserve/reserve.js"></script>
+}
+
+@Html.Partial("~/Views/_NotificationResult.cshtml")";
+<br />
+<div class="container row p-0 m-0">
+    <div class="col-6">
+        <h2 class="text-info"> Theater Seating Plan </h2>
+        <p>Select your seat(Red seats are already reserved.)</p>
+        <br />
+    </div>
+</div>
+<div>
+    <form asp-action="ReserveSeat" asp-controller="Reserve" method="post" autocomplete="off">
+        <div class="container row p-0 m-0">
+            <div class="col-6">
+                <p>Please select movie: </p>
+                <select asp-for="MovieId" class="form-control" onchange="movieChange()" id="movie">
+                    <option value="0">Select Movie</option>
+                    @foreach (var movie in Model.ListMovie)
+                    {
+                        <option value="@movie.Id">@movie.Movie_Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-3" id="divTimeSlot">
+                <p>Please select time slot: </p>
+                <select asp-for="TimeSlotId" class="form-control" disabled id="timeSlot" onchange="timeChange()">
+                    <option>Select Time</option>
+                </select>
+            </div>
+        </div>
+        <div class="container " id="divSeat">
+            <br />
+        </div>
+        <div class="container ">
+            <div class="row hidden" id="stage" style="display: none;">
+                <div class="col-8 offset-2">
+                    <a class="btn btn-secondary form-control text-white"> Stage</a>
+                </div>
+            </div>
+            <br />
+            <div class="container row p-0 m-0">
+
+                <div class="form-group">
+                    <label>Client Name: </label>
+                    <input asp-for="ClientName" type="text" class="form-control" id="ClientName" placeholder="Enter Name">
+                    <br />
+                    <button type="reset" class="btn btn-info">Reset</button>
+                    <button type="submit" class="btn btn-primary">Reserve now</button>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form asp-action="ReserveSeat" asp-controller="Reserve" method="post" autocomplete="off">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalSuccessful">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Successfully reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>

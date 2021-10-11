@@ -1,0 +1,54 @@
+﻿@model MovieReservationSystem.Models.MovieModel
+
+@section Scripts{ 
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+}
+
+@Html.Partial("~/Views/_NotificationResult.cshtml")";
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="container row p-0 m-0">
+    <div class="col-9">
+        <h2 class="text-info"> Create Movie</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <form asp-controller="Movie" asp-action="Create" method="post" autocomplete="off">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools left">
+                        <a asp-action="Index" class="btn btn-box-tool"><i class="fa fa-arrow-left" data-toggle="tooltip" data-placement="top" title="Back"></i></a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label asp-for="Movie_Name" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="Movie_Name" class="form-control" />
+                                <span asp-validation-for="Movie_Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="Description" class="form-control" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer text-right">
+                    <button type="reset" class="btn btn-info">Reset</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
